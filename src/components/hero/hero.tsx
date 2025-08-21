@@ -55,15 +55,14 @@ export default function Hero() {
             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-black/30 via-black/15 to-transparent" />
           </div>
 
-          {/* Left filmstrip: 57px container = 27px gap + 30px strip */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-50 w-[57px] bg-black">
+          {/* Filmstrips UNDER collage (z-20) */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[57px] bg-black">
             <div
               className="absolute top-0 left-0 w-[30px] h-full bg-repeat-y bg-center bg-contain opacity-85"
               style={{ backgroundImage: "url(/images/hero/filmstrip.png)" }}
             />
           </div>
-          {/* Right filmstrip */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-50 w-[57px] bg-black">
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[57px] bg-black">
             <div
               className="absolute top-0 right-0 w-[30px] h-full bg-repeat-y bg-center bg-contain opacity-85"
               style={{ backgroundImage: "url(/images/hero/filmstrip.png)" }}
@@ -92,7 +91,7 @@ export default function Hero() {
             />
           </div>
 
-          {/* Buttons + arrow (exact widths on md+) */}
+          {/* Buttons + arrow */}
           <div
             className="absolute z-40 flex flex-col gap-[12px]"
             style={{ top: "64.7%", left: "12.5%", width: "23.1%" }}
@@ -112,9 +111,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Collage (percent values from 1440x940) */}
-          <div className="relative z-20 w-full h-full">
-            {/* meat:  top 38.9%, left 46.6%, w 15.5%, h 45.6% */}
+          {/* Collage ABOVE filmstrips (z-30) */}
+          <div className="relative z-30 w-full h-full">
             <div
               className="absolute border-[3px] border-white rounded-md shadow-lg overflow-hidden z-30"
               style={{ top: "38.9%", left: "46.6%", width: "15.5%", height: "45.6%" }}
@@ -127,9 +125,8 @@ export default function Hero() {
                 sizes="15.5vw"
               />
             </div>
-            {/* pizza: top 16.4%, left 71%, w 18.8%, h 51.6% */}
             <div
-              className="absolute border-[3px] border-white rounded-md shadow-lg overflow-hidden z-40"
+              className="absolute border-[3px] border-white rounded-md shadow-lg overflow-hidden z-30"
               style={{ top: "16.4%", left: "71%", width: "18.8%", height: "51.6%" }}
             >
               <Image
@@ -140,9 +137,8 @@ export default function Hero() {
                 sizes="18.8vw"
               />
             </div>
-            {/* steak: top 23.4%, left 56.6%, w 23.5%, h 69.1% */}
             <div
-              className="absolute border-[3px] border-white rounded-md shadow-xl overflow-hidden z-50"
+              className="absolute border-[3px] border-white rounded-md shadow-xl overflow-hidden z-30"
               style={{ top: "23.4%", left: "56.6%", width: "23.5%", height: "69.1%" }}
             >
               <Image
