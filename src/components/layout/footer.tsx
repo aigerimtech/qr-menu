@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-/* ---------- FOOTER ---------- */
 export default function Footer() {
   return (
     <footer className="w-full text-white">
@@ -16,7 +15,6 @@ export default function Footer() {
               <div className="flex items-center gap-4">
                 <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={24} height={24} />
                 <Image src="/icons/instagram.svg" alt="Instagram" width={24} height={24} />
-                
               </div>
             </section>
 
@@ -34,29 +32,30 @@ export default function Footer() {
             </section>
           </div>
 
-          <div className="absolute left-1/2 -translate-x-1/2 top-[348px] w-[254px] h-[192px] flex flex-col items-center">
-            <Image
-              src="/icons/brand/brand-logo-white.svg"
-              alt="SVOY"
-              width={254}
-              height={120}
-              priority
-              className="w-[254px] h-auto"
-            />
-            <div className="mt-3 bg-white text-[#820A0A] px-4 py-2 rounded-md font-semibold">
-              SINCE 2009
+          {/* Центр: 254×192 (лого 254×120 + 12px + бейдж 155×31) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-[348px] z-10">
+            <div className="w-[254px] h-[192px] flex flex-col items-center">
+              <Image
+                src="/icons/brand/brand-logo-white.svg"
+                alt="SVOY"
+                width={254}
+                height={120}
+                className="w-[254px] h-[120px] object-contain"
+                priority
+              />
+              <div className="mt-[12px] inline-flex items-center justify-center w-[254px] h-[50px] px-[10px] py-[6px] gap-[10px] bg-white text-[#820A0A] rounded-none font-extrabold uppercase text-[24px] leading-none">
+                SINCE 2009
+              </div>
             </div>
           </div>
 
-          <div className="absolute top-[448px] left-[100px] w-[396px] border-t-[4px] border-white/90" />
-          <div className="absolute top-[448px] right-[100px] w-[396px] border-t-[4px] border-white/90" />
+          <FooterLinesDesktop />
         </div>
       </div>
 
       {/* Mobile */}
       <div className="md:hidden bg-[#820A0A]">
-        <div className="px-5 pt-8 pb-12 flex flex-col gap-10">
-          {/* Контакты */}
+        <div className="px-5 pt-8 pb-0 flex flex-col gap-10">
           <section>
             <h3 className="text-[26px] font-semibold leading-[34px]">Контакты</h3>
             <p className="mt-3 text-[18px] leading-[26px]">+7 777 09 00 333</p>
@@ -66,7 +65,6 @@ export default function Footer() {
             </div>
           </section>
 
-          {/* Адреса */}
           <section>
             <h3 className="text-[26px] font-semibold leading-[34px]">Адреса</h3>
             <p className="mt-3 text-[18px] leading-[26px]">г. Астана, ул. Жумабаева, 24</p>
@@ -75,7 +73,6 @@ export default function Footer() {
             </div>
           </section>
 
-          {/* Часы работы с вертикальной линией между колонками */}
           <section className="relative">
             <h3 className="text-[26px] font-semibold leading-[34px]">Часы работы</h3>
             <div className="relative mt-4">
@@ -84,17 +81,19 @@ export default function Footer() {
             </div>
           </section>
 
-          {/* Лого + бейдж слева снизу */}
-          <div className="mt-10 ml-1 flex flex-col items-start">
-            <Image
-              src="/icons/brand/brand-logo-white.svg"
-              alt="SVOY"
-              width={200}
-              height={120}
-              className="w-[200px] h-auto"
-            />
-            <div className="mt-2 inline-flex bg-white text-[#820A0A] px-4 py-2 rounded-md font-extrabold uppercase text-[14px] leading-[14px]">
-              Since 2009
+          {/* Лого+бейдж: 155×139; 12px между; 36px до низа */}
+          <div className="mt-10 ml-1 mb-[36px]">
+            <div className="w-[155px] h-[139px] flex flex-col">
+              <Image
+                src="/icons/brand/brand-logo-white.svg"
+                alt="SVOY"
+                width={155}
+                height={96}
+                className="w-[155px] h-[96px] object-contain"
+              />
+              <div className="mt-[12px] w-[155px] h-[31px] px-[10px] py-[6px] inline-flex items-center justify-center bg-white text-[#820A0A] rounded-none font-extrabold uppercase text-[14px] leading-none">
+                SINCE 2009
+              </div>
             </div>
           </div>
         </div>
@@ -103,7 +102,34 @@ export default function Footer() {
   );
 }
 
-/* ---------- SCHEDULE (desktop) ---------- */
+/* Гибкие линии: 100px от краёв экрана и 97px зазор от логотипа */
+function FooterLinesDesktop() {
+  const logoW = 254; // ширина центрального блока с логотипом
+  const gapX = 97;   // зазор от линии до логотипа с каждой стороны
+
+  return (
+    <div
+      className="absolute left-0 right-0 top-[445px] z-0 px-[100px] mx-[-32px]"
+      style={{
+        ["--logoW" as any]: `${logoW}px`,
+        ["--gapX" as any]: `${gapX}px`,
+      }}
+    >
+      <div className="relative h-[4px]">
+        <span
+          className="absolute left-0 top-0 h-[4px] bg-white/90"
+          style={{ width: "max(0px, calc(50% - (var(--logoW) / 2) - var(--gapX)))" }}
+        />
+        <span
+          className="absolute right-0 top-0 h-[4px] bg-white/90"
+          style={{ width: "max(0px, calc(50% - (var(--logoW) / 2) - var(--gapX)))" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* Helpers */
 function DesktopSchedule() {
   const rows: [string, string][] = [
     ["Пн–Чт", "17:00–01:00"],
@@ -116,14 +142,13 @@ function DesktopSchedule() {
       {rows.map(([d, t]) => (
         <div key={d} className="grid grid-cols-[56px,1fr] gap-4">
           <span className="opacity-90">{d}</span>
-          <span className="opacity-100">{t}</span>
+          <span className="opacity-100 tabular-nums">{t}</span>
         </div>
       ))}
     </div>
   );
 }
 
-/* ---------- SCHEDULE (mobile, с вертикальной линией между колонками) ---------- */
 function MobileSchedule() {
   const rows: [string, string][] = [
     ["Пн–Чт", "17:00–01:00"],
@@ -136,7 +161,7 @@ function MobileSchedule() {
       {rows.map(([d, t]) => (
         <div key={d} className="grid grid-cols-[88px,1fr] gap-x-4 gap-y-2 items-baseline">
           <span>{d}</span>
-          <span>{t}</span>
+          <span className="tabular-nums">{t}</span>
         </div>
       ))}
     </div>
