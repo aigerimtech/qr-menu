@@ -3,10 +3,8 @@ import Hero from "@/components/hero/hero";
 export default function Home() {
   return (
     <>
-      {/* Hero (first screen) */}
       <Hero />
 
-      {/* Next section, scroll target for ArrowDown */}
       <section
         id="next-section"
         className="scroll-mt-[102px] py-24 bg-white"
@@ -17,7 +15,7 @@ export default function Home() {
           </h2>
 
           <div className="mt-8 h-64 border border-dashed rounded-xl grid place-items-center text-gray-500">
-            Заглушка: здесь будет галерея / меню
+            Здесь будет галерея / меню
           </div>
         </div>
       </section>

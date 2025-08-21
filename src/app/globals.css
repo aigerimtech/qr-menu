@@ -3,21 +3,11 @@
 @tailwind utilities;
 
 html { scroll-behavior: smooth; }
-body { overflow-x: hidden; }
+body { background: #060606; overflow-x: hidden; }
 
-html, body {
-  background: #060606;   
-}
-body {
-  overflow-x: hidden;    
-}
-
-/* Short landscape screens (iPad landscape, Nest Hub/Max, small laptops) */
 @media (max-height: 820px) and (min-width: 1024px) {
-  .hero-collage { transform: scale(0.88); transform-origin: center right; }
+  .hero-collage { transform: scale(0.9); transform-origin: center right; }
 }
-
-/* Very short desktop heights */
 @media (max-height: 700px) and (min-width: 1024px) {
-  .hero-collage { transform: scale(0.80); transform-origin: center right; }
+  .hero-collage { transform: scale(0.8); transform-origin: center right; }
 }
