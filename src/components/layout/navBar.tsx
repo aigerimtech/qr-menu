@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [showMobileBar, setShowMobileBar] = useState(false);
+  const pathname = usePathname();
 
+  // Always call hooks unconditionally
   useEffect(() => {
     const onScroll = () => {
       const y =
@@ -20,6 +23,12 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Now it's safe to early-return
+  const hideOnOffers = pathname?.startsWith("/offers");
+  if (hideOnOffers) {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -49,9 +58,8 @@ export default function Navbar() {
 
       {/* Desktop / Tablet */}
       <div className="hidden md:block bg-white border-b-[6px] border-[#9b1b1b]">
-        {/* grid: [лого | авто-ширина меню | контакты] => меню всегда в абсолютном центре */}
         <div className="mx-auto max-w-[1440px] h-[96px] px-8 grid grid-cols-[1fr_auto_1fr] items-center">
-          {/* Лого (лево) */}
+          {/* Logo */}
           <div className="justify-self-start">
             <Link href="/" className="flex items-center" aria-label="Домой">
               <Image
@@ -64,7 +72,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Меню (центр) */}
+          {/* Menu */}
           <nav className="justify-self-center">
             <ul className="flex items-center gap-[30px] text-[20px] leading-[28px] text-[#151515]">
               <li><Link href="#about"   className="hover:opacity-70">О нас</Link></li>
@@ -74,7 +82,7 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          {/* Контакты (право) */}
+          {/* Contacts */}
           <div className="justify-self-end hidden lg:flex flex-col justify-center gap-[12px]">
             <div className="flex items-center gap-2 w-[197px] h-[23px]">
               <Image src="/icons/address-navbar.svg" alt="Адрес" width={16} height={16} />

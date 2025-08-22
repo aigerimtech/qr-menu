@@ -1,5 +1,5 @@
 import Hero from "@/components/hero/hero";
-import GallerySection from "@/components/sections/gallerySection";
+import OffersSlider from "@/components/sections/offersSlider";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
 
       <section className="bg-white py-16">
         <div className="max-w-[1440px] mx-auto px-4">
-          <GallerySection />
+          <OffersSlider />
         </div>
       </section>
     </>
