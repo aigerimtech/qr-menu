@@ -3,6 +3,10 @@ import Navbar from "@/components/layout/navBar";
 import "./globals.css";
 import { raleway } from "@/fonts/raleway";
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={raleway.variable}>
