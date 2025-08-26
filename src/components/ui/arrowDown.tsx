@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface Props {
   className?: string;
   targetId?: string;
@@ -16,9 +18,10 @@ export default function ArrowDown({
   const handleClick = () => {
     if (!targetId) return;
     const el = document.getElementById(targetId);
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (
@@ -26,9 +29,14 @@ export default function ArrowDown({
       type="button"
       onClick={handleClick}
       aria-label={ariaLabel}
-      className={`cursor-pointer ${className}`}
+      className={className}
     >
-      <img src="/icons/arrow-down.svg" alt="" width={22} height={35} />
+      <Image
+        src="/icons/arrow-down.svg"
+        alt=""
+        width={20}
+        height={20}
+      />
     </button>
   );
 }

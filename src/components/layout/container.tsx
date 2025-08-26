@@ -7,8 +7,10 @@ export default function Container({ className = "", children }: Props) {
     <div
       className={[
         "mx-auto w-full",
-        "max-w-[1280px] lg:max-w-[1440px]",   // 1280 on laptops, 1440 on big desktops
-        "px-4 sm:px-6 lg:px-8",               // safe side paddings
+        // Cap at 1280 px on laptops and 1440 px on large desktops
+        "max-w-[1280px] lg:max-w-[1440px]",
+        // Provide some breathing room on the sides
+        "px-4 sm:px-6 lg:px-8",
         className,
       ].join(" ")}
     >
