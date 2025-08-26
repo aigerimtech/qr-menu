@@ -25,17 +25,13 @@ export default function ArrowDown({
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      aria-label={ariaLabel}
-      className={className}
-    >
+    <button type="button" onClick={handleClick} aria-label={ariaLabel} className={className}>
       <Image
         src="/icons/arrow-down.svg"
         alt=""
-        width={20}
-        height={20}
+        width={29}
+        height={34}
+        className="w-[20px] h-[20px] md:w-[29px] md:h-[34px]"
       />
     </button>
   );

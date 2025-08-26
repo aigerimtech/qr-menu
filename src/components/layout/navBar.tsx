@@ -1,4 +1,3 @@
-// components/layout/Navbar.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,10 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [showMobileBar, setShowMobileBar] = useState(false);
 
-  // Не показываем бар на определённых страницах
-  if (pathname?.startsWith("/offers")) return null;
-
-  // Управляем появлением мобильного бара после скролла
+  // Show mobile top bar after hero leaves viewport
   useEffect(() => {
     const hero = document.getElementById("hero");
     if (hero && "IntersectionObserver" in window) {
@@ -27,7 +23,6 @@ export default function Navbar() {
       io.observe(hero);
       return () => io.disconnect();
     }
-    // Фолбэк для старых браузеров
     const onScroll = () => {
       const y =
         window.scrollY ??
@@ -41,9 +36,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Keep after hooks to avoid hook-order errors
+  if (pathname?.startsWith("/offers")) return null;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-[60]">
-      {/* ---------- MOBILE TOP BAR (appears after hero) ---------- */}
+      {/* Mobile top bar */}
       <div
         className={`md:hidden transition-transform duration-300 will-change-transform ${
           showMobileBar
@@ -51,57 +49,40 @@ export default function Navbar() {
             : "-translate-y-full opacity-0 pointer-events-none"
         } bg-white border-b-[3px] border-[#9b1b1b]`}
       >
-        {/* Figma: bar 96px; logo 85×40 @ top:16px; address @ top:64px */}
         <div className="relative h-[96px] w-full">
-          <Link
-            href="/"
-            aria-label="SVOY"
-            className="absolute left-1/2 -translate-x-1/2 top-4"
-          >
-            <Image
-              src="/icons/brand/brand-logo-red.svg"
-              alt="SVOY"
-              width={85}
-              height={40}
-              priority
-            />
+          <Link href="/" aria-label="SVOY" className="absolute left-1/2 -translate-x-1/2 top-4">
+            <Image src="/icons/brand/brand-logo-red.svg" alt="SVOY" width={85} height={40} priority />
           </Link>
-
           <span className="absolute left-1/2 -translate-x-1/2 top-16 text-[16px] leading-[16px] font-raleway">
             ул.&nbsp;Жумабаева&nbsp;24
           </span>
         </div>
       </div>
 
-      {/* ---------- DESKTOP / TABLET NAVBAR ---------- */}
+      {/* Desktop / tablet */}
       <div className="hidden md:block bg-white border-b-[3px] border-[#9b1b1b]">
         <Container>
           <div className="h-[96px] flex items-center justify-between">
-            {/* Left: Logo */}
+            {/* Left: logo */}
             <div className="flex-shrink-0">
               <Link href="/" aria-label="SVOY">
-                <Image
-                  src="/icons/brand/brand-logo-red.svg"
-                  alt="SVOY"
-                  width={109}
-                  height={52}
-                />
+                <Image src="/icons/brand/brand-logo-red.svg" alt="SVOY" width={109} height={52} />
               </Link>
             </div>
 
-            {/* Centre: Menu */}
+            {/* Center: menu */}
             <nav className="flex-1 flex justify-center">
               <ul className="flex gap-10 text-[20px] leading-[28px] text-[#151515]">
-                <li><Link href="#about" className="hover:opacity-70">О нас</Link></li>
-                <li><Link href="#offers" className="hover:opacity-70">Наши предложения</Link></li>
-                <li><Link href="#menu" className="hover:opacity-70">Меню ресторана</Link></li>
-                <li><Link href="#contact" className="hover:opacity-70">Связаться с нами</Link></li>
+                <li><Link href="#about" className="hover:opacity-70">О&nbsp;нас</Link></li>
+                <li><Link href="#offers" className="hover:opacity-70">Наши&nbsp;предложения</Link></li>
+                <li><Link href="#menu" className="hover:opacity-70">Меню&nbsp;ресторана</Link></li>
+                <li><Link href="#contact" className="hover:opacity-70">Связаться&nbsp;с&nbsp;нами</Link></li>
               </ul>
             </nav>
 
-            {/* Right: Address + Phone */}
-            <div className="hidden lg:flex flex-col items-end space-y-1">
-              <div className="flex items-center gap-2">
+            {/* Right: address + phone aligned in a 2-col grid */}
+            <div className="hidden lg:block">
+              <div className="grid grid-cols-[20px_auto] gap-x-2 gap-y-1 items-center">
                 <Image
                   src="/icons/address-navbar.svg"
                   alt="Адрес"
@@ -110,10 +91,9 @@ export default function Navbar() {
                   className="shrink-0"
                 />
                 <span className="whitespace-nowrap text-[20px] leading-[23px]">
-                  ул. Жумабаева 24
+                  ул.&nbsp;Жумабаева&nbsp;24
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
+
                 <Image
                   src="/icons/phone.svg"
                   alt="Телефон"
@@ -125,7 +105,7 @@ export default function Navbar() {
                   href="tel:+77770900333"
                   className="whitespace-nowrap text-[20px] leading-[23px] hover:opacity-70"
                 >
-                  +7 777 09 00 333
+                  +7&nbsp;777&nbsp;09&nbsp;00&nbsp;333
                 </a>
               </div>
             </div>

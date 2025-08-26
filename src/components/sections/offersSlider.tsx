@@ -20,7 +20,7 @@ const OFFERS: Offer[] = [
     subtitle: "до 28 человек",
     image: "/images/offers/vip-karaoke.png",
   },
-  // add more items to see the side-peek effect on desktop/tablet
+  
 ];
 
 export default function OffersSlider() {
