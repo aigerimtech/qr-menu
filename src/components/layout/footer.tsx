@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full text-white">
+    <footer id="site-footer" className="w-full text-white">
       {/* Desktop / Tablet */}
       <div className="hidden md:block bg-[#820A0A]">
         <div className="relative mx-auto max-w-[1440px] h-[634px] px-8 pt-[72px]">

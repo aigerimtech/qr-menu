@@ -11,3 +11,21 @@ body { background: #060606; overflow-x: hidden; }
 @media (max-height: 700px) and (min-width: 1024px) {
   .hero-collage { transform: scale(0.8); transform-origin: center right; }
 }
+
+/* Hide any built-in Swiper arrows */
+.swiper-button-prev, .swiper-button-next { display: none !important; }
+
+/* Detail page white rectangle bullets */
+.offer-detail-pagination { display: flex; gap: 8px; align-items: center; justify-content: center; }
+.offer-detail-pagination .offer-detail-bullet {
+  width: 8px; height: 8px; border-radius: 2px; background: rgba(255,255,255,0.55);
+  display: inline-block; transition: all 200ms ease;
+}
+.offer-detail-pagination .offer-detail-bullet.swiper-pagination-bullet-active {
+  width: 12px; height: 8px; background: #fff;
+}
+
+:root { --nav-h: 96px; }
+.hide-footer #site-footer { display: none !important; }
+
+

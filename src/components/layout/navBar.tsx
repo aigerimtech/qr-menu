@@ -95,7 +95,7 @@ export default function Navbar() {
                 </span>
 
                 <Image
-                  src="/icons/phone.svg"
+                  src="/icons/contact/phone.svg"
                   alt="Телефон"
                   width={20}
                   height={20}

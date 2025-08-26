@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import OfferPageClient, { Offer } from "@/components/sections/offerPageClient";
 
-// Example data source (swap for a DB call).
 const offerData: Record<string, Offer> = {
   "vip-karaoke": {
     title: "VIP-зал с караоке",
@@ -14,7 +13,7 @@ const offerData: Record<string, Offer> = {
     content: [
       "Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
       "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper.",
-      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
+      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
     ],
   },
 };
@@ -24,11 +23,8 @@ export default async function OfferPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // Next 15: unwrap async params
-  const { slug } = await params;
-
+  const { slug } = await params;                
   const offer = offerData[slug as keyof typeof offerData];
   if (!offer) notFound();
-
   return <OfferPageClient offer={offer} />;
 }
