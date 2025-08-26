@@ -106,7 +106,7 @@ export default function OffersSlider() {
           className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
           onClick={() => swiperRef.current?.slidePrev()}
         >
-          <Image src="/icons/slidergallery/slider-arrow-back.svg" alt="" width={24} height={24} className="w-6 h-6" />
+          <Image src="/icons/sliderGallery/slider-arrow-back.svg" alt="" width={24} height={24} className="w-6 h-6" />
         </button>
         <button
           type="button"
@@ -115,7 +115,7 @@ export default function OffersSlider() {
           className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
           onClick={() => swiperRef.current?.slideNext()}
         >
-          <Image src="/icons/slidergallery/slider-arrow-forward.svg" alt="" width={24} height={24} className="w-6 h-6" />
+          <Image src="/icons/sliderGallery/slider-arrow-forward.svg" alt="" width={24} height={24} className="w-6 h-6" />
         </button>
       </div>
     </section>

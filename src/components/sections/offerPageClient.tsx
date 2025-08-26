@@ -172,7 +172,7 @@ export default function OfferPageClient({ offer }: { offer: Offer }) {
                 rel="noopener"
                 className="w-[364px] max-w-full h-[56px] bg-[#25D366] text-white flex items-center justify-center gap-3 px-[40px] py-[16px] rounded-sm text-[16px] leading-[100%] font-medium font-raleway"
               >
-                <Image src="/icons/contact/whatsapp.svg" alt="WhatsApp" width={24} height={24} className="w-6 h-6" />
+                <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={24} height={24} className="w-6 h-6" />
                 Написать Whatsapp
               </a>
 
@@ -180,7 +180,7 @@ export default function OfferPageClient({ offer }: { offer: Offer }) {
                 href="tel:+77770900333"
                 className="w-[364px] max-w-full h-[56px] bg-white text-[#9b1b1b] border-2 border-[#9b1b1b] flex items-center justify-center gap-3 px-[40px] py-[16px] rounded-sm text-[16px] leading-[100%] font-medium font-raleway"
               >
-                <Image src="/icons/contact/phone.svg" alt="Телефон" width={24} height={24} className="w-6 h-6" />
+                <Image src="/icons/phone.svg" alt="Телефон" width={24} height={24} className="w-6 h-6" />
                 Позвонить по номеру
               </a>
             </div>
