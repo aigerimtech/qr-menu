@@ -120,14 +120,14 @@ export default function OffersSlider() {
           aria-label="Предыдущий"
           className="w-[44px] h-[44px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/slidergallery/slider-arrow-back.svg" alt="" width={20} height={20} />
+          <Image src="/icons/sliderGallery/slider-arrow-back.svg" alt="" width={20} height={20} />
         </button>
         <button
           ref={nextRef}
           aria-label="Следующий"
           className="w-[44px] h-[44px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/slidergallery/slider-arrow-forward.svg" alt="" width={20} height={20} />
+          <Image src="/icons/sliderGallery/slider-arrow-forward.svg" alt="" width={20} height={20} />
         </button>
       </div>
 
