@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 
 type Props = { variant?: "mobile" | "desktop" };
 
@@ -30,9 +31,9 @@ function SmoothScroll({
 }
 
 export default function HeroButtons({ variant = "desktop" }: Props) {
+  const t = useTranslations("hero.buttons");
   const isMobile = variant === "mobile";
 
-  // размеры по макету
   const dlW = isMobile ? "w-[188px]" : "w-[226px]";
   const dlH = isMobile ? "h-[51px]" : "h-[63px]";
   const viewW = isMobile ? "w-[273px]" : "w-[332px]";
@@ -42,7 +43,6 @@ export default function HeroButtons({ variant = "desktop" }: Props) {
 
   return (
     <div className={`flex flex-col items-center ${isMobile ? "gap-[16px]" : "gap-[24px]"}`}>
-      {/* Скачать меню */}
       <a
         href="#"
         className={[
@@ -53,11 +53,12 @@ export default function HeroButtons({ variant = "desktop" }: Props) {
           "hover:bg-black/60",
         ].join(" ")}
       >
-        Скачать&nbsp;меню
+        {t("download")}
       </a>
 
-      {/* Смотреть меню на сайте — скролл к #menu */}
-      <SmoothScroll targetId="menu" offset={96}
+      <SmoothScroll
+        targetId="menu"
+        offset={96}
         className={[
           "flex items-center justify-center rounded-[2px] border font-semibold text-[20px] leading-[20px]",
           viewW, viewH, pxX, pyY,
@@ -65,7 +66,7 @@ export default function HeroButtons({ variant = "desktop" }: Props) {
           "shadow-[0_0_12px_0_rgba(0,0,0,0.75)] hover:bg-gray-50",
         ].join(" ")}
       >
-        Смотреть&nbsp;меню&nbsp;на&nbsp;сайте
+        {t("viewOnline")}
       </SmoothScroll>
     </div>
   );

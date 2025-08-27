@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "about": "Біз туралы",
+    "offers": "Ұсыныстар",
+    "menu": "Мейрамхана мәзірі",
+    "contact": "Байланыс",
+    "address": "Жұмабаев к-сі, 24",
+    "phone": "+7 777 09 00 333"
+  },
+
+  "footer": {
+    "contacts": "Байланыс",
+    "addressTitle": "Мекенжай",
+    "hours": "Жұмыс уақыты",
+    "phone": "+7 777 09 00 333",
+    "address": "Астана қ., Жұмабаев көшесі, 24",
+    "work": {
+      "monThu": { "label": "Дс–Бс", "time": "17:00–01:00" },
+      "fri":     { "label": "Жм",    "time": "17:00–02:00" },
+      "sat":     { "label": "Сб",    "time": "14:00–02:00" },
+      "sun":     { "label": "Жс",    "time": "14:00–01:00" }
+    }
+  },
+
+  "offers": {
+    "sectionTitle": "БІЗ ТУРАЛЫ ЖӘНЕ ҰСЫНЫСТАР"
+  },
+
+  "offerItems": {
+    "vip-karaoke": {
+      "title": "Караокесі бар VIP зал",
+      "subtitle": "28 адамға дейін",
+      "content": [
+        "Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
+        "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper.",
+        "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl."
+      ]
+    }
+  },
+
+  "offerDetail": {
+    "back": "Басты бетке оралу",
+    "share": "Бөлісу",
+    "book": "Брондау",
+    "bookDesc": "Байланысу тәсілін таңдаңыз:"
+  },
+
+  "hero": {
+    "buttons": {
+      "download": "Мәзірді жүктеу",
+      "viewOnline": "Мәзірді сайтта көру"
+    }
+  },
+
+  "modal": {
+    "close": "Жабу"
+  }
+}

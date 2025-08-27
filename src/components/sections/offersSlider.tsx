@@ -1,3 +1,4 @@
+// src/components/sections/offersSlider.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -10,7 +11,7 @@ import "swiper/css";
 
 import { getOfferBySlug } from "@/data/offers";
 
-export default function OffersSlider() {
+export default function OffersSlider({ title }: { title: string }) {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -21,7 +22,6 @@ export default function OffersSlider() {
   useEffect(() => {
     const sw = swiperRef.current;
     if (!sw || !prevRef.current || !nextRef.current) return;
-    // подключаем внешние стрелки
     // @ts-expect-error runtime override
     sw.params.navigation.prevEl = prevRef.current;
     // @ts-expect-error runtime override
@@ -34,7 +34,19 @@ export default function OffersSlider() {
   return (
     <section id="offers" className="w-full">
       <h2 className="text-[24px] md:text-[40px] font-bold text-[#9b1b1b] mb-6 md:whitespace-nowrap">
-        О НАС И НАШИ <br className="md:hidden" /> ПРЕДЛОЖЕНИЯ
+        {title.split(" ").length > 0 ? (
+          <>
+            {/* мобильный: перенос на 2 строки */}
+            <span className="md:hidden">
+              {/* простой перенос: до/после «И»; можно настроить по вкусу */}
+              {title.replace(" И ", " И\n ")}
+            </span>
+            {/* десктоп: в одну строку */}
+            <span className="hidden md:inline">{title}</span>
+          </>
+        ) : (
+          title
+        )}
       </h2>
 
       <div className="relative overflow-hidden md:px-[49px]">
@@ -77,10 +89,8 @@ export default function OffersSlider() {
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     priority={idx === 0}
                   />
-
                   <div className="fade-bottom absolute left-0 right-0 bottom-0 pointer-events-none z-10" />
                   <div className="dim-all absolute inset-0 pointer-events-none z-10 transition-opacity duration-300" />
-
                   <div className="absolute inset-x-0 bottom-0 z-20 px-4 pb-4 pt-10 md:px-6 md:pb-6 lg:px-8">
                     <div className="text-white drop-shadow-sm">
                       <div className="font-semibold leading-[1.1] text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px]">

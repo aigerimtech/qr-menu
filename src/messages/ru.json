@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "about": "О нас",
+    "offers": "Наши предложения",
+    "menu": "Меню ресторана",
+    "contact": "Связаться с нами",
+    "address": "ул. Жумабаева 24",
+    "phone": "+7 777 09 00 333"
+  },
+  
+  "footer": {
+    "contacts": "Контакты",
+    "addressTitle": "Адрес",
+    "hours": "Часы работы",
+    "phone": "+7 777 09 00 333",
+    "address": "г. Астана, ул. Жумабаева, 24",
+    "work": {
+      "monThu": { "label": "Пн–Чт", "time": "17:00–01:00" },
+      "fri":     { "label": "Пт",    "time": "17:00–02:00" },
+      "sat":     { "label": "Сб",    "time": "14:00–02:00" },
+      "sun":     { "label": "Вс",    "time": "14:00–01:00" }
+    }
+  },
+  "offers": {
+    "sectionTitle": "О НАС И НАШИ ПРЕДЛОЖЕНИЯ"
+  },
+
+  "offerItems": {
+    "vip-karaoke": {
+      "title": "VIP-зал с караоке",
+      "subtitle": "до 28 человек",
+      "content": [
+      "Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
+      "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper.",
+      "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl."
+      ]
+    }
+  },
+
+  "offerDetail": {
+    "back": "Вернуться на главную",
+    "share": "Поделиться",
+    "book": "Забронировать",
+    "bookDesc": "Свяжитесь с нами удобным способом:"
+  },
+  "hero": {
+    "buttons": {
+      "download": "Скачать меню",
+      "viewOnline": "Смотреть меню на сайте"
+    }
+  },
+  "modal": {
+    "close": "Закрыть"
+  } 
+}

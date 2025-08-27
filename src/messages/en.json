@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "about": "About",
+    "offers": "Our offers",
+    "menu": "Restaurant menu",
+    "contact": "Contact us",
+    "address": "24 Zhumabaeva St.",
+    "phone": "+7 777 09 00 333"
+  },
+  "footer": {
+    "contacts": "Contacts",
+    "addressTitle": "Address",
+    "hours": "Opening hours",
+    "phone": "+7 777 09 00 333",
+    "address": "Astana, Zhumabayev St., 24",
+    "work": {
+      "monThu": { "label": "Mon–Thu", "time": "17:00–01:00" },
+      "fri":     { "label": "Fri",     "time": "17:00–02:00" },
+      "sat":     { "label": "Sat",     "time": "14:00–02:00" },
+      "sun":     { "label": "Sun",     "time": "14:00–01:00" }
+    }
+  },
+  "offers": {
+    "sectionTitle": "ABOUT US & OUR OFFERS"
+  },
+
+  "offerItems": {
+    "vip-karaoke": {
+      "title": "VIP room with karaoke",
+      "subtitle": "up to 28 people",
+      "content": [
+        "Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",
+        "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper.",
+        "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl."
+      ]
+    }
+  }, 
+
+    "offerDetail": {
+    "back": "Back to Home",
+    "share": "Share",
+    "book": "Reserve",
+    "bookDesc": "Contact us via:"
+  },
+  
+  "hero": {
+    "buttons": {
+      "download": "Download menu",
+      "viewOnline": "View menu online"
+    }
+  },
+
+  "modal": {
+    "close": "Close"
+  }
+}

@@ -23,7 +23,7 @@ export default function Hero() {
 
         {/* Центровка логотипа и плашки */}
         <div className="absolute inset-x-0 top-0 flex flex-col items-center justify-center px-4 h-full pointer-events-none">
-          {/* Логотип + SINCE (mobile размеры из прежней версии) */}
+          {/* Логотип + SINCE */}
           <div className="pointer-events-auto">
             <Image
               src="/icons/logo/logo-white.svg"
@@ -37,13 +37,11 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Кнопки — строго от низа:
-              нижняя на 98px, верхняя из-за h=51 и gap=16 даёт 165px */}
+    
           <div className="pointer-events-auto absolute left-1/2 -translate-x-1/2 bottom-[98px]">
             <HeroButtons variant="mobile" />
           </div>
 
-          {/* Стрелка — на 38px ниже нижней кнопки → 98 - 38 = 60 */}
           <div className="pointer-events-auto absolute left-1/2 -translate-x-1/2 bottom-[60px]">
             <div className="relative w-[21.21163px] h-[34.84713px]">
               <ArrowDown
@@ -88,7 +86,7 @@ export default function Hero() {
               />
             </div>
 
-            {/* Логотип + SINCE (позиционирование только здесь) */}
+            {/* Логотип + SINCE */}
             <div
               className="absolute z-40 flex flex-col items-start"
               style={{ top: "26.8%", left: "11.7%", width: "24.5%" }}
@@ -96,7 +94,7 @@ export default function Hero() {
               <HeroLogo />
             </div>
 
-            {/* Кнопки + стрелка (позиции в % по макету) */}
+            {/* Кнопки + стрелка */}
             <div
               className="absolute z-40 flex flex-col"
               style={{ top: "64.7%", left: "12.5%", width: "23.1%" }}

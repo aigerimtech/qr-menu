@@ -9,7 +9,6 @@ export default function Container({ className = "", children }: Props) {
         "mx-auto w-full",
         // Cap at 1280 px on laptops and 1440 px on large desktops
         "max-w-[1280px] lg:max-w-[1440px]",
-        // Provide some breathing room on the sides
         "px-4 sm:px-6 lg:px-8",
         className,
       ].join(" ")}
