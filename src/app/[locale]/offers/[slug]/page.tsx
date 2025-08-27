@@ -9,7 +9,6 @@ export default function OfferPage({
 }) {
   const offer = getOfferBySlug(params.slug);
   if (!offer) notFound();
-
   return <OfferPageClient offer={offer} />;
 }
 
