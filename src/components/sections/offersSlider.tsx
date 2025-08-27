@@ -33,8 +33,8 @@ export default function OffersSlider() {
 
   return (
     <section id="offers" className="w-full">
-      <h2 className="text-[32px] md:text-[40px] font-extrabold text-[#9b1b1b] mb-6">
-        О НАС И НАШИ ПРЕДЛОЖЕНИЯ
+      <h2 className="text-[24px] md:text-[40px] font-bold text-[#9b1b1b] mb-6 md:whitespace-nowrap">
+         О НАС И НАШИ <br className="md:hidden" /> ПРЕДЛОЖЕНИЯ
       </h2>
 
       <div className="relative overflow-hidden md:px-[49px]">
@@ -113,21 +113,21 @@ export default function OffersSlider() {
         </Swiper>
       </div>
 
-      {/* arrows (unchanged) */}
+      {/* arrows  */}
       <div className="mt-6 flex items-center justify-center gap-4">
         <button
           ref={prevRef}
           aria-label="Предыдущий"
-          className="w-[64px] h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
+          className="w-[44px] h-[44px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/slidergallery/slider-arrow-back.svg" alt="" width={24} height={24} />
+          <Image src="/icons/slidergallery/slider-arrow-back.svg" alt="" width={20} height={20} />
         </button>
         <button
           ref={nextRef}
           aria-label="Следующий"
-          className="w-[64px] h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
+          className="w-[44px] h-[44px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/slidergallery/slider-arrow-forward.svg" alt="" width={24} height={24} />
+          <Image src="/icons/slidergallery/slider-arrow-forward.svg" alt="" width={20} height={20} />
         </button>
       </div>
 
