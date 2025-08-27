@@ -1,4 +1,3 @@
-// src/components/sections/offersSlider.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -9,15 +8,17 @@ import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 
-import { getOfferBySlug } from "@/data/offers";
+import { OFFERS_INDEX } from "@/data/offers";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function OffersSlider({ title }: { title: string }) {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const offer = getOfferBySlug("vip-karaoke");
-  const slides = offer?.images ?? [];
+  const locale = useLocale();
+  // one hook for all offers; we’ll address nested keys with `${slug}.key`
+  const tOffer = useTranslations("offerItems");
 
   useEffect(() => {
     const sw = swiperRef.current;
@@ -36,12 +37,7 @@ export default function OffersSlider({ title }: { title: string }) {
       <h2 className="text-[24px] md:text-[40px] font-bold text-[#9b1b1b] mb-6 md:whitespace-nowrap">
         {title.split(" ").length > 0 ? (
           <>
-            {/* мобильный: перенос на 2 строки */}
-            <span className="md:hidden">
-              {/* простой перенос: до/после «И»; можно настроить по вкусу */}
-              {title.replace(" И ", " И\n ")}
-            </span>
-            {/* десктоп: в одну строку */}
+            <span className="md:hidden">{title.replace(" И ", " И\n ")}</span>
             <span className="hidden md:inline">{title}</span>
           </>
         ) : (
@@ -57,7 +53,7 @@ export default function OffersSlider({ title }: { title: string }) {
           modules={[Navigation]}
           onSwiper={(sw) => (swiperRef.current = sw)}
           navigation
-          loop={slides.length > 1}
+          loop={OFFERS_INDEX.length > 1}
           watchOverflow={false}
           slidesPerView="auto"
           centeredSlides
@@ -74,39 +70,47 @@ export default function OffersSlider({ title }: { title: string }) {
           }}
           className="offers-slider !overflow-visible"
         >
-          {slides.map((img, idx) => (
-            <SwiperSlide
-              key={img.id}
-              className="!w-[80vw] xs:!w-[82vw] sm:!w-[84vw] md:!w-[78vw] lg:!w-[1000px]"
-            >
-              <Link href="/offers/vip-karaoke" className="block group overflow-hidden">
-                <article className="relative aspect-[1000/492]">
-                  <Image
-                    src={img.src}
-                    alt={offer.title}
-                    fill
-                    sizes="(min-width:1024px) 1000px, (min-width:768px) 78vw, (min-width:480px) 84vw, 80vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    priority={idx === 0}
-                  />
-                  <div className="fade-bottom absolute left-0 right-0 bottom-0 pointer-events-none z-10" />
-                  <div className="dim-all absolute inset-0 pointer-events-none z-10 transition-opacity duration-300" />
-                  <div className="absolute inset-x-0 bottom-0 z-20 px-4 pb-4 pt-10 md:px-6 md:pb-6 lg:px-8">
-                    <div className="text-white drop-shadow-sm">
-                      <div className="font-semibold leading-[1.1] text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px]">
-                        {offer.title}
-                      </div>
-                      {offer.subtitle && (
-                        <div className="mt-1 opacity-90 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-                          {offer.subtitle}
+          {OFFERS_INDEX.map(({ slug, image }, idx) => {
+            const offerTitle = safeT(tOffer, `${slug}.title`) || slug;
+            const offerSubtitle = safeT(tOffer, `${slug}.subtitle`);
+
+            return (
+              <SwiperSlide
+                key={slug}
+                className="!w-[80vw] xs:!w-[82vw] sm:!w-[84vw] md:!w-[78vw] lg:!w-[1000px]"
+              >
+                <Link
+                  href={`/${locale}/offers/${slug}`}
+                  className="block group overflow-hidden"
+                >
+                  <article className="relative aspect-[1000/492]">
+                    <Image
+                      src={image}
+                      alt={offerTitle}
+                      fill
+                      sizes="(min-width:1024px) 1000px, (min-width:768px) 78vw, (min-width:480px) 84vw, 80vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      priority={idx === 0}
+                    />
+                    <div className="fade-bottom absolute left-0 right-0 bottom-0 pointer-events-none z-10" />
+                    <div className="dim-all absolute inset-0 pointer-events-none z-10 transition-opacity duration-300" />
+                    <div className="absolute inset-x-0 bottom-0 z-20 px-4 pb-4 pt-10 md:px-6 md:pb-6 lg:px-8">
+                      <div className="text-white drop-shadow-sm">
+                        <div className="font-semibold leading-[1.1] text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px]">
+                          {offerTitle}
                         </div>
-                      )}
+                        {offerSubtitle && (
+                          <div className="mt-1 opacity-90 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+                            {offerSubtitle}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </Link>
-            </SwiperSlide>
-          ))}
+                  </article>
+                </Link>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 
@@ -181,4 +185,9 @@ export default function OffersSlider({ title }: { title: string }) {
       `}</style>
     </section>
   );
+}
+
+// safe accessor for optional keys
+function safeT(t: ReturnType<typeof useTranslations>, key: string): string | undefined {
+  try { return t(key); } catch { return undefined; }
 }

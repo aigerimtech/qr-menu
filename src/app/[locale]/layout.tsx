@@ -8,8 +8,6 @@ import Footer from "@/components/layout/footer";
 import "../globals.css";
 import { raleway } from "@/fonts/raleway";
 
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -22,7 +20,6 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   const locale = params.locale as Locale;
-
   if (!locales.includes(locale)) notFound();
 
   const messages = await getMessages(locale);
