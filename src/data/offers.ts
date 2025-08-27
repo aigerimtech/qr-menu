@@ -17,6 +17,10 @@ export const OFFERS_BY_SLUG: Record<string, Offer> = {
       { id: "vip-1", src: "/images/offers/vip-karaoke.png" },
       { id: "vip-2", src: "/images/offers/vip-karaoke.png" },
       { id: "vip-3", src: "/images/offers/vip-karaoke.png" },
+      { id: "vip-4", src: "/images/offers/vip-karaoke.png" },
+      { id: "vip-5", src: "/images/offers/vip-karaoke.png" },
+      { id: "vip-6", src: "/images/offers/vip-karaoke.png" },
+
     ],
     content: [
       "Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Ut diam quam, semper iaculis condimentum ac, vestibulum eu nisl.",

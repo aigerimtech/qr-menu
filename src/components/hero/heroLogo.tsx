@@ -5,7 +5,7 @@ export default function HeroLogo() {
   return (
     <>
       <Image
-        src="/icons/brand/brand-logo-white.svg"
+        src="/icons/logo/logo-white.svg"
         alt="SVOY white logo"
         width={353}
         height={164}

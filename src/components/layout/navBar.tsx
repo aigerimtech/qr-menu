@@ -62,7 +62,7 @@ export default function Navbar() {
             className="absolute left-1/2 -translate-x-1/2 top-4"
           >
             <Image
-              src="/icons/brand/brand-logo-red.svg"
+              src="/icons/logo/logo-red.svg"
               alt="SVOY"
               width={85}
               height={40}
@@ -82,7 +82,7 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link href="/" aria-label="SVOY">
                 <Image
-                  src="/icons/brand/brand-logo-red.svg"
+                  src="/icons/logo/logo-red.svg"
                   alt="SVOY"
                   width={109}
                   height={52}
@@ -101,11 +101,11 @@ export default function Navbar() {
 
             <div className="hidden lg:block">
               <div className="grid grid-cols-[20px_auto] gap-x-2 gap-y-1 items-center">
-                <Image src="/icons/address-navbar.svg" alt="Адрес" width={20} height={20} />
+                <Image src="/icons/navbar/address-navbar.svg" alt="Адрес" width={20} height={20} />
                 <span className="whitespace-nowrap text-[20px] leading-[23px]">
                   ул.&nbsp;Жумабаева&nbsp;24
                 </span>
-                <Image src="/icons/phone.svg" alt="Телефон" width={20} height={20} />
+                <Image src="/icons/navbar/phone.svg" alt="Телефон" width={20} height={20} />
                 <a href="tel:+77770900333" className="whitespace-nowrap text-[20px] leading-[23px] hover:opacity-70">
                   +7&nbsp;777&nbsp;09&nbsp;00&nbsp;333
                 </a>

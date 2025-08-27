@@ -26,7 +26,7 @@ export default function Hero() {
           {/* Логотип + SINCE (mobile размеры из прежней версии) */}
           <div className="pointer-events-auto">
             <Image
-              src="/icons/brand/brand-logo-white.svg"
+              src="/icons/logo/logo-white.svg"
               alt="SVOY white logo"
               width={240}
               height={80}

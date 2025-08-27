@@ -13,8 +13,8 @@ export default function Footer() {
               <h3 className="text-[24px] font-semibold leading-7 mb-3">Контакты</h3>
               <p className="text-[16px] leading-6 mb-4">+7 777 09 00 333</p>
               <div className="flex items-center gap-4">
-                <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={24} height={24} />
-                <Image src="/icons/instagram.svg" alt="Instagram" width={24} height={24} />
+                <Image src="/icons/footer/whatsapp.svg" alt="WhatsApp" width={24} height={24} />
+                <Image src="/icons/footer/instagram.svg" alt="Instagram" width={24} height={24} />
               </div>
             </section>
 
@@ -22,7 +22,7 @@ export default function Footer() {
               <h3 className="text-[24px] font-semibold leading-7 mb-3">Адреса</h3>
               <p className="text-[16px] leading-6">г. Астана, ул. Жумабаева, 24</p>
               <div className="mt-4">
-                <Image src="/icons/adress-footer.png" alt="Адрес" width={24} height={24} />
+                <Image src="/icons/footer/adress-footer.png" alt="Адрес" width={24} height={24} />
               </div>
             </section>
 
@@ -36,7 +36,7 @@ export default function Footer() {
           <div className="absolute left-1/2 -translate-x-1/2 top-[348px] z-10">
             <div className="w-[254px] h-[192px] flex flex-col items-center">
               <Image
-                src="/icons/brand/brand-logo-white.svg"
+                src="/icons/logo/logo-white.svg"
                 alt="SVOY"
                 width={254}
                 height={120}
@@ -60,8 +60,8 @@ export default function Footer() {
             <h3 className="text-[26px] font-semibold leading-[34px]">Контакты</h3>
             <p className="mt-3 text-[18px] leading-[26px]">+7 777 09 00 333</p>
             <div className="mt-3 flex items-center gap-5">
-              <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={28} height={28} />
-              <Image src="/icons/instagram.svg" alt="Instagram" width={28} height={28} />
+              <Image src="/icons/footer/whatsapp.svg" alt="WhatsApp" width={28} height={28} />
+              <Image src="/icons/footer/instagram.svg" alt="Instagram" width={28} height={28} />
             </div>
           </section>
 
@@ -69,7 +69,7 @@ export default function Footer() {
             <h3 className="text-[26px] font-semibold leading-[34px]">Адреса</h3>
             <p className="mt-3 text-[18px] leading-[26px]">г. Астана, ул. Жумабаева, 24</p>
             <div className="mt-3">
-              <Image src="/icons/adress-footer.png" alt="Адрес" width={28} height={28} />
+              <Image src="/icons/footer/adress-footer.png" alt="Адрес" width={28} height={28} />
             </div>
           </section>
 
@@ -85,7 +85,7 @@ export default function Footer() {
           <div className="mt-10 ml-1 mb-[36px]">
             <div className="w-[155px] h-[139px] flex flex-col">
               <Image
-                src="/icons/brand/brand-logo-white.svg"
+                src="/icons/logo/logo-white.svg"
                 alt="SVOY"
                 width={155}
                 height={96}
