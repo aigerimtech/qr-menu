@@ -1,123 +1,137 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
-type Card = { id: string; slug: string; title: string; subtitle: string; image: string };
-
-const CARDS: Card[] = [
-  { id: "vip-card-1", slug: "vip-karaoke", title: "VIP-зал с караоке", subtitle: "до 28 человек", image: "/images/offers/vip-karaoke.png" },
-  { id: "vip-card-2", slug: "vip-karaoke", title: "VIP-зал с караоке", subtitle: "до 28 человек", image: "/images/offers/vip-karaoke.png" },
-  { id: "vip-card-3", slug: "vip-karaoke", title: "VIP-зал с караоке", subtitle: "до 28 человек", image: "/images/offers/vip-karaoke.png" },
-];
+import { OFFERS_INDEX } from "@/data/offers";
 
 export default function OffersSlider() {
-  const swiperRef = useRef<SwiperType | null>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
-  const paginationRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
+  // If you have < 3 items, clone the first to keep a continuous loop
+  const slides = useMemo(() => {
+    if (OFFERS_INDEX.length >= 3) return OFFERS_INDEX;
+    const base = OFFERS_INDEX[0];
+    return [0, 1, 2].map((i) => ({ ...base, _key: `${base.slug}-${i}` })) as any[];
+  }, []);
+
+  // Wire external arrows after Swiper is ready
   useEffect(() => {
     const sw = swiperRef.current;
-    if (!sw) return;
-
-    if (prevRef.current && nextRef.current) {
-      // @ts-ignore
-      sw.params.navigation.prevEl = prevRef.current;
-      // @ts-ignore
-      sw.params.navigation.nextEl = nextRef.current;
-      sw.navigation.destroy();
-      sw.navigation.init();
-      sw.navigation.update();
-    }
-
-    if (paginationRef.current) {
-      // @ts-ignore
-      sw.params.pagination.el = paginationRef.current;
-      // @ts-ignore
-      sw.params.pagination.clickable = true;
-      // @ts-ignore
-      sw.params.pagination.renderBullet = (_i: number, className: string) =>
-        `<span class="${className} offer-bullet"></span>`;
-      sw.pagination.destroy();
-      sw.pagination.init();
-      sw.pagination.render();
-      sw.pagination.update();
-    }
+    if (!sw || !prevRef.current || !nextRef.current) return;
+    // @ts-expect-error – runtime override is OK
+    sw.params.navigation.prevEl = prevRef.current;
+    // @ts-expect-error – runtime override is OK
+    sw.params.navigation.nextEl = nextRef.current;
+    sw.navigation.destroy();
+    sw.navigation.init();
+    sw.navigation.update();
   }, []);
 
   return (
     <section id="offers" className="w-full">
-      <h2 className="text-[28px] md:text-[40px] font-extrabold text-[#9b1b1b] mb-6">
+      <h2 className="text-[32px] md:text-[40px] font-extrabold text-[#9b1b1b] mb-6">
         О НАС И НАШИ ПРЕДЛОЖЕНИЯ
       </h2>
 
+      {/* No side gradients anymore. We darken non-active slides instead. */}
       <div className="relative overflow-hidden md:px-[49px]">
-        <div className="pointer-events-none hidden md:block absolute inset-y-0 left-0 w-[49px] bg-gradient-to-r from-black/55 to-transparent" />
-        <div className="pointer-events-none hidden md:block absolute inset-y-0 right-0 w-[49px] bg-gradient-to-l from-black/55 to-transparent" />
-
         <Swiper
-          modules={[Navigation, Pagination]}
+          modules={[Navigation]}
           onSwiper={(sw) => (swiperRef.current = sw)}
-          slidesPerView={1}
+          navigation
+          loop
+          loopAdditionalSlides={3}
+          centeredSlides
+          slidesPerView="auto"
           spaceBetween={8}
-          loop={CARDS.length > 1}
-          breakpoints={{ 768: { slidesPerView: "auto", centeredSlides: true, spaceBetween: 8 } }}
-          className="!overflow-visible"
+          breakpoints={{
+            768: { spaceBetween: 49 }, // keep Figmas 49px on md+
+          }}
+          className="offers-slider !overflow-visible"
         >
-          {CARDS.map((c) => (
-            <SwiperSlide key={c.id} className="md:!w-[1000px]">
-              <Link href={`/offers/${c.slug}`} className="block group rounded-md overflow-hidden">
+          {slides.map((o: any, idx: number) => (
+            <SwiperSlide
+              key={o._key ?? o.slug}
+              /* Sharp rectangles + width that peeks neighbors on all devices:
+                 - mobile:   100vw - 64px   (≈32px peek on each side)
+                 - tablet+:  100vw - 98px   (keeps 49px gaps)
+                 - xl:       fixed 1000px   (your desktop card width)
+              */
+              className="relative !w-[calc(100vw-64px)] md:!w-[calc(100vw-98px)] xl:!w-[1000px]"
+            >
+              <Link href={`/offers/${o.slug}`} className="block overflow-hidden">
                 <article className="relative aspect-[1000/492]">
                   <Image
-                    src={c.image}
-                    alt={c.title}
+                    src={o.image}
+                    alt={o.title}
                     fill
-                    sizes="(min-width:768px) 1000px, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    priority
+                    sizes="(min-width:1280px) 1000px, (min-width:768px) calc(100vw - 98px), calc(100vw - 64px)"
+                    className="object-cover"
+                    priority={idx === 0}
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/55" />
-                  <div className="absolute left-6 bottom-6 text-white">
-                    <div className="text-[22px] md:text-[28px] font-semibold drop-shadow-sm">{c.title}</div>
-                    <div className="text-[16px] md:text-[18px] opacity-90">{c.subtitle}</div>
+
+                  {/* Darken non-active slides (controlled by CSS below) */}
+                  <div className="dim absolute inset-0 bg-black transition-opacity duration-300 pointer-events-none" />
+
+                  {/* Bottom gradient for legibility of text */}
+                  <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent via-black/15 to-black/55" />
+
+                  {/* Absolute text – always visible and never clipped */}
+                  <div className="absolute inset-x-0 bottom-0 z-20 px-4 pb-4 pt-10 md:px-6 md:pb-6 lg:px-8">
+                    <div className="text-white drop-shadow-sm">
+                      <div className="font-semibold leading-[1.1] text-[18px] sm:text-[20px] md:text-[28px]">
+                        {o.title}
+                      </div>
+                      {o.subtitle && (
+                        <div className="mt-1 opacity-90 text-[12px] sm:text-[14px] md:text-[18px]">
+                          {o.subtitle}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </article>
               </Link>
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <div ref={paginationRef} className="offers-pagination absolute left-1/2 -translate-x-1/2 bottom-3 md:bottom-4 z-30" />
       </div>
 
+      {/* External arrows (unchanged) */}
       <div className="mt-6 flex items-center justify-center gap-4">
         <button
-          type="button"
           ref={prevRef}
           aria-label="Предыдущий"
-          className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
-          onClick={() => swiperRef.current?.slidePrev()}
+          className="w-[64px] h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/sliderGallery/slider-arrow-back.svg" alt="" width={24} height={24} className="w-6 h-6" />
+          <Image src="/icons/slidergallery/slider-arrow-back.svg" alt="" width={24} height={24} />
         </button>
         <button
-          type="button"
           ref={nextRef}
           aria-label="Следующий"
-          className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
-          onClick={() => swiperRef.current?.slideNext()}
+          className="w-[64px] h-[64px] border-2 border-[#9b1b1b] rounded-[6px] grid place-items-center hover:bg-[#9b1b1b]/10 transition"
         >
-          <Image src="/icons/sliderGallery/slider-arrow-forward.svg" alt="" width={24} height={24} className="w-6 h-6" />
+          <Image src="/icons/slidergallery/slider-arrow-forward.svg" alt="" width={24} height={24} />
         </button>
       </div>
+
+      {/* Global styles for the darkening rule */}
+      <style jsx global>{`
+        /* Slightly darken all slides except the centered one */
+        .offers-slider .swiper-slide .dim {
+          opacity: 0.35; /* tweak this value to match Figma exactly */
+        }
+        .offers-slider .swiper-slide-active .dim {
+          opacity: 0;
+        }
+      `}</style>
     </section>
   );
 }

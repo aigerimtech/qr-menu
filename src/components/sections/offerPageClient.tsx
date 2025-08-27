@@ -125,7 +125,7 @@ export default function OfferPageClient({ offer }: { offer: Offer }) {
             className="p-2 -m-2 rounded hover:bg-black/5 active:bg-black/10"
           >
             <Image
-              src="/icons/contact/share.svg"
+              src="/icons/share.svg"
               alt=""
               width={18}
               height={20}

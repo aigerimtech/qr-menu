@@ -27,5 +27,10 @@ body { background: #060606; overflow-x: hidden; }
 
 :root { --nav-h: 96px; }
 .hide-footer #site-footer { display: none !important; }
+html.no-nav-gap { --nav-h: 0px; } /* на оффер-странице */
+
+
+/* Если фон страницы по умолчанию чёрный, а на детальной нужен белый */
+html.no-nav-gap body { background: #fff !important; }
 
 

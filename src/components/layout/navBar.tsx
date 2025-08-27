@@ -10,34 +10,40 @@ export default function Navbar() {
   const pathname = usePathname();
   const [showMobileBar, setShowMobileBar] = useState(false);
 
-  // Show mobile top bar after hero leaves viewport
-  useEffect(() => {
-    const hero = document.getElementById("hero");
-    if (hero && "IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          setShowMobileBar(!entry.isIntersecting && entry.boundingClientRect.top <= 0);
-        },
-        { root: null, threshold: 0, rootMargin: "-96px 0px 0px 0px" }
-      );
-      io.observe(hero);
-      return () => io.disconnect();
-    }
-    const onScroll = () => {
-      const y =
-        window.scrollY ??
-        document.documentElement.scrollTop ??
-        document.body.scrollTop ??
-        0;
-      setShowMobileBar(y > window.innerHeight - 96);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // true на странице детального оффера
+  const isOfferDetail = /^\/offers\/[^/]+$/.test(pathname ?? "");
 
-  // Keep after hooks to avoid hook-order errors
-  if (pathname?.startsWith("/offers")) return null;
+  useEffect(() => {
+    // На детальной странице ничего не подписываем
+    if (isOfferDetail) {
+      setShowMobileBar(false);
+      return;
+    }
+
+    const hero = document.getElementById("hero");
+    // Если героя нет (внутр. страницы) — показываем бар сразу
+    if (!hero) {
+      setShowMobileBar(true);
+      return;
+    }
+
+    const update = () => {
+      const bottom = hero.getBoundingClientRect().bottom;
+      // показываем бар, когда герой полностью ушёл вверх
+      setShowMobileBar(bottom <= 0);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [isOfferDetail]);
+
+  
+  if (isOfferDetail) return null;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[60]">
@@ -50,8 +56,18 @@ export default function Navbar() {
         } bg-white border-b-[3px] border-[#9b1b1b]`}
       >
         <div className="relative h-[96px] w-full">
-          <Link href="/" aria-label="SVOY" className="absolute left-1/2 -translate-x-1/2 top-4">
-            <Image src="/icons/brand/brand-logo-red.svg" alt="SVOY" width={85} height={40} priority />
+          <Link
+            href="/"
+            aria-label="SVOY"
+            className="absolute left-1/2 -translate-x-1/2 top-4"
+          >
+            <Image
+              src="/icons/brand/brand-logo-red.svg"
+              alt="SVOY"
+              width={85}
+              height={40}
+              priority
+            />
           </Link>
           <span className="absolute left-1/2 -translate-x-1/2 top-16 text-[16px] leading-[16px] font-raleway">
             ул.&nbsp;Жумабаева&nbsp;24
@@ -63,14 +79,17 @@ export default function Navbar() {
       <div className="hidden md:block bg-white border-b-[3px] border-[#9b1b1b]">
         <Container>
           <div className="h-[96px] flex items-center justify-between">
-            {/* Left: logo */}
             <div className="flex-shrink-0">
               <Link href="/" aria-label="SVOY">
-                <Image src="/icons/brand/brand-logo-red.svg" alt="SVOY" width={109} height={52} />
+                <Image
+                  src="/icons/brand/brand-logo-red.svg"
+                  alt="SVOY"
+                  width={109}
+                  height={52}
+                />
               </Link>
             </div>
 
-            {/* Center: menu */}
             <nav className="flex-1 flex justify-center">
               <ul className="flex gap-10 text-[20px] leading-[28px] text-[#151515]">
                 <li><Link href="#about" className="hover:opacity-70">О&nbsp;нас</Link></li>
@@ -80,31 +99,14 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            {/* Right: address + phone aligned in a 2-col grid */}
             <div className="hidden lg:block">
               <div className="grid grid-cols-[20px_auto] gap-x-2 gap-y-1 items-center">
-                <Image
-                  src="/icons/address-navbar.svg"
-                  alt="Адрес"
-                  width={20}
-                  height={20}
-                  className="shrink-0"
-                />
+                <Image src="/icons/address-navbar.svg" alt="Адрес" width={20} height={20} />
                 <span className="whitespace-nowrap text-[20px] leading-[23px]">
                   ул.&nbsp;Жумабаева&nbsp;24
                 </span>
-
-                <Image
-                  src="/icons/contact/phone.svg"
-                  alt="Телефон"
-                  width={20}
-                  height={20}
-                  className="shrink-0"
-                />
-                <a
-                  href="tel:+77770900333"
-                  className="whitespace-nowrap text-[20px] leading-[23px] hover:opacity-70"
-                >
+                <Image src="/icons/phone.svg" alt="Телефон" width={20} height={20} />
+                <a href="tel:+77770900333" className="whitespace-nowrap text-[20px] leading-[23px] hover:opacity-70">
                   +7&nbsp;777&nbsp;09&nbsp;00&nbsp;333
                 </a>
               </div>

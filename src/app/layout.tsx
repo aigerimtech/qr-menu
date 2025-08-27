@@ -10,12 +10,10 @@ import "swiper/css/pagination";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={raleway.variable}>
-      {/* Define navbar height as a CSS variable once */}
-      <body className="bg-[#060606] [--nav-h:100px]">
+      {/* Резерв под фикс-навигацию — через padding-top и переменную */}
+      <body className="bg-[#060606] md:pt-[var(--nav-h)]">
         <Navbar />
 
-        {/* Spacer: only visible on md+ so content isn’t covered by fixed navbar */}
-        <div aria-hidden className="hidden md:block h-[var(--nav-h)]" />
 
         <main>{children}</main>
 
