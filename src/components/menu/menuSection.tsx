@@ -135,7 +135,9 @@ function FilterToggle({label}: {label: string}) {
       className={cx(
         "flex-none inline-flex items-center justify-between",
         "snap-start",
+        // mobile
         "min-w-[288px] h-[52px] pl-[16px] pr-[66px] pt-[18px] pb-[18px]",
+        // desktop
         "md:min-w-0 md:h-[66px] md:pl-[24px] md:pr-[89px] md:pt-[21.5px] md:pb-[21.5px]",
         "gap-3 md:gap-4 cursor-pointer select-none"
       )}

@@ -1,6 +1,4 @@
 import type {Dish} from "@/components/menu/dishCard";
-
-// Place your real photos under /public/images/menu/*
 export const SALADS: Dish[] = [
   {
     id: "salad-1",
