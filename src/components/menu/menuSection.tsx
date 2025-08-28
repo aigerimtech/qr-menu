@@ -45,7 +45,7 @@ export default function MenuSection({
   }, [active, cats, onChange]);
 
   return (
-    <section className="w-full bg-white">
+    <section id="menu" className="w-full bg-white">
       {/* Title row */}
       <div className="mx-auto w-full max-w-[1040px] px-4">
         <h2 className="pt-8 md:pt-12 font-raleway font-bold uppercase text-[#961515] text-[28px] md:text-[40px] leading-[1]">

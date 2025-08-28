@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
 
 type Props = { variant?: "mobile" | "desktop" };
 
@@ -9,7 +9,7 @@ function SmoothScroll({
   targetId,
   offset = 96,
   children,
-  className = "",
+  className = ""
 }: {
   targetId: string;
   offset?: number;
@@ -18,11 +18,21 @@ function SmoothScroll({
 }) {
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault();
+
     const el = document.getElementById(targetId);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+    // Try to use CSS var --nav-h if present (we set it globally)
+    const cssVar = getComputedStyle(document.documentElement)
+      .getPropertyValue("--nav-h")
+      .trim()
+      .replace("px", "");
+    const navOffset = Number(cssVar) || offset || 96;
+
+    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
     window.scrollTo({ top, behavior: "smooth" });
   };
+
   return (
     <a href={`#${targetId}`} onClick={onClick} className={className}>
       {children}
@@ -50,7 +60,7 @@ export default function HeroButtons({ variant = "desktop" }: Props) {
           dlW, dlH, pxX, pyY,
           "bg-black/50 text-white border-white",
           "shadow-[0_0_12px_0_#000000BF] backdrop-blur-[3px]",
-          "hover:bg-black/60",
+          "hover:bg-black/60"
         ].join(" ")}
       >
         {t("download")}
@@ -58,12 +68,11 @@ export default function HeroButtons({ variant = "desktop" }: Props) {
 
       <SmoothScroll
         targetId="menu"
-        offset={96}
         className={[
           "flex items-center justify-center rounded-[2px] border font-semibold text-[20px] leading-[20px]",
           viewW, viewH, pxX, pyY,
           "bg-white text-[#9b1b1b] border-[#9b1b1b]",
-          "shadow-[0_0_12px_0_rgba(0,0,0,0.75)] hover:bg-gray-50",
+          "shadow-[0_0_12px_0_rgba(0,0,0,0.75)] hover:bg-gray-50"
         ].join(" ")}
       >
         {t("viewOnline")}
