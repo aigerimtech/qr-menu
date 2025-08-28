@@ -1,77 +1,92 @@
+// src/components/sections/offersSlider.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
-import { Navigation } from "swiper/modules";
+import {Swiper, SwiperSlide} from "swiper/react";
+import type {Swiper as SwiperType} from "swiper";
+import {Navigation} from "swiper/modules";
 import "swiper/css";
 
-import { OFFERS_INDEX } from "@/data/offers";
-import { useTranslations, useLocale } from "next-intl";
+import {OFFERS_INDEX} from "@/data/offers";
+import {useTranslations, useLocale} from "next-intl";
 
-export default function OffersSlider({ title }: { title: string }) {
+export default function OffersSlider() {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
   const locale = useLocale();
-  // one hook for all offers; we’ll address nested keys with `${slug}.key`
+
+  // Section title (client-side)
+  const t = useTranslations();
+  const sectionTitle = safeT(t, "offers.sectionTitle") ?? "Offers";
+
+  // Offer card texts (client-side, using a namespace)
   const tOffer = useTranslations("offerItems");
 
   useEffect(() => {
     const sw = swiperRef.current;
     if (!sw || !prevRef.current || !nextRef.current) return;
-    // @ts-expect-error runtime override
+
+    // Wire custom buttons after mount
+    // @ts-expect-error - Swiper runtime params override
     sw.params.navigation.prevEl = prevRef.current;
-    // @ts-expect-error runtime override
+    // @ts-expect-error - Swiper runtime params override
     sw.params.navigation.nextEl = nextRef.current;
-    sw.navigation.destroy();
+
+    // Re-init navigation with custom elements
+    try {
+      sw.navigation.destroy();
+    } catch {}
     sw.navigation.init();
     sw.navigation.update();
   }, []);
 
+  // Small helper to insert a line break before/after " И " on mobile (Russian title style)
+  const titleMobile =
+    locale === "ru"
+      ? sectionTitle.replace(" И ", " И\n ")
+      : sectionTitle;
+
   return (
     <section id="offers" className="w-full">
       <h2 className="text-[24px] md:text-[40px] font-bold text-[#9b1b1b] mb-6 md:whitespace-nowrap">
-        {title.split(" ").length > 0 ? (
-          <>
-            <span className="md:hidden">{title.replace(" И ", " И\n ")}</span>
-            <span className="hidden md:inline">{title}</span>
-          </>
-        ) : (
-          title
-        )}
+        <>
+          <span className="md:hidden whitespace-pre-line">{titleMobile}</span>
+          <span className="hidden md:inline">{sectionTitle}</span>
+        </>
       </h2>
 
       <div className="relative overflow-hidden md:px-[49px]">
+        {/* edge masks for desktop */}
         <div className="pointer-events-none hidden md:block absolute inset-y-0 left-0 w-[49px] bg-gradient-to-r from-black/55 to-transparent" />
         <div className="pointer-events-none hidden md:block absolute inset-y-0 right-0 w-[49px] bg-gradient-to-l from-black/55 to-transparent" />
 
         <Swiper
           modules={[Navigation]}
           onSwiper={(sw) => (swiperRef.current = sw)}
-          navigation
-          loop={OFFERS_INDEX.length > 1}
-          watchOverflow={false}
+          // We'll enable & attach navigation in the effect
           slidesPerView="auto"
           centeredSlides
           centeredSlidesBounds
+          loop={OFFERS_INDEX.length > 1}
+          watchOverflow={false}
           resistanceRatio={0.85}
           spaceBetween={8}
           breakpoints={{
-            0: { spaceBetween: 8 },
-            360: { spaceBetween: 10 },
-            480: { spaceBetween: 12 },
-            640: { spaceBetween: 16 },
-            768: { spaceBetween: 24 },
-            1024: { spaceBetween: 49 },
+            0: {spaceBetween: 8},
+            360: {spaceBetween: 10},
+            480: {spaceBetween: 12},
+            640: {spaceBetween: 16},
+            768: {spaceBetween: 24},
+            1024: {spaceBetween: 49}
           }}
           className="offers-slider !overflow-visible"
         >
-          {OFFERS_INDEX.map(({ slug, image }, idx) => {
-            const offerTitle = safeT(tOffer, `${slug}.title`) || slug;
+          {OFFERS_INDEX.map(({slug, image}, idx) => {
+            const offerTitle = safeT(tOffer, `${slug}.title`) ?? slug;
             const offerSubtitle = safeT(tOffer, `${slug}.subtitle`);
 
             return (
@@ -114,6 +129,7 @@ export default function OffersSlider({ title }: { title: string }) {
         </Swiper>
       </div>
 
+      {/* External arrows */}
       <div className="mt-6 flex items-center justify-center gap-4">
         <button
           ref={prevRef}
@@ -187,7 +203,13 @@ export default function OffersSlider({ title }: { title: string }) {
   );
 }
 
-// safe accessor for optional keys
-function safeT(t: ReturnType<typeof useTranslations>, key: string): string | undefined {
-  try { return t(key); } catch { return undefined; }
+// ---------- utils ----------
+type TFunc = (key: string) => string;
+function safeT(t: TFunc, key: string): string | undefined {
+  try {
+    const v = t(key);
+    return typeof v === "string" ? v : undefined;
+  } catch {
+    return undefined;
+  }
 }
