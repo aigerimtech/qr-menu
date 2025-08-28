@@ -1,2 +1,4 @@
-import { permanentRedirect } from "next/navigation";
-export default function Root() { permanentRedirect("/ru"); }
+import {permanentRedirect} from "next/navigation";
+export default function Root() {
+  permanentRedirect("/ru");
+}

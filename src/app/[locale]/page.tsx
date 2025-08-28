@@ -4,8 +4,13 @@ import Container from "@/components/layout/container";
 import {getTranslations} from "next-intl/server";
 import type {Locale} from "@/i18n";
 
-export default async function Home({ params }: { params: { locale: Locale } }) {
-  const t = await getTranslations({ locale: params.locale });
+type PageProps = {
+  params: Promise<{locale: Locale}>; // <- async
+};
+
+export default async function Home(props: PageProps) {
+  const {locale} = await props.params;          // <- await it
+  const t = await getTranslations({locale});
 
   return (
     <>

@@ -1,11 +1,12 @@
-import { notFound } from "next/navigation";
+import {notFound} from "next/navigation";
 import OfferPageClient from "@/components/sections/offerPageClient";
-import { getOfferBySlug, OFFERS_BY_SLUG } from "@/data/offers";
+import {getOfferBySlug, OFFERS_BY_SLUG} from "@/data/offers";
+import {routing} from "@/i18n/routing";
 
 export default function OfferPage({
-  params,
+  params
 }: {
-  params: { locale: string; slug: string };
+  params: {locale: string; slug: string};
 }) {
   const offer = getOfferBySlug(params.slug);
   if (!offer) notFound();
@@ -13,5 +14,8 @@ export default function OfferPage({
 }
 
 export function generateStaticParams() {
-  return Object.keys(OFFERS_BY_SLUG).map((slug) => ({ slug }));
+  const slugs = Object.keys(OFFERS_BY_SLUG);
+  return routing.locales.flatMap((locale) =>
+    slugs.map((slug) => ({locale, slug}))
+  );
 }

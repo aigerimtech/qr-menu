@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
-import {locales} from "@/i18n";
+import {locales} from "@/i18n/routing";
 import Container from "@/components/layout/container";
 
 export default function Navbar() {

@@ -1,26 +1,32 @@
 import {notFound} from "next/navigation";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
-import {locales, type Locale} from "@/i18n";
+import {routing, type Locale} from "@/i18n";
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({locale}));
+  return routing.locales.map((locale) => ({locale}));
 }
 
-export default async function LocaleLayout({
-  children,
-  params
-}: {
+type LayoutProps = {
   children: React.ReactNode;
-  params: {locale: string};
-}) {
-  const locale = params.locale as Locale;
-  if (!locales.includes(locale)) notFound();
+  params: Promise<{locale: string}>; // <- async in Next 15
+};
 
-  const messages = await getMessages(); // locale inferred from the segment
+export default async function LocaleLayout(props: LayoutProps) {
+  const {locale} = await props.params;          // <- await it
+  const l = locale as Locale;
+  if (!routing.locales.includes(l)) notFound();
+
+  // Either works; this is explicit:
+  const messages = await getMessages({locale: l});
+
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={l}>
+      <body>
+        <NextIntlClientProvider locale={l} messages={messages}>
+          {props.children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
