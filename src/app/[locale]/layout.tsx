@@ -1,30 +1,26 @@
+import {ReactNode} from "react";
 import {notFound} from "next/navigation";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
-import {routing, type Locale} from "@/i18n";
+import {routing} from "@/i18n/routing";
+
+type Props = { children: ReactNode; params: Promise<{locale: string}>; };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
 
-type LayoutProps = {
-  children: React.ReactNode;
-  params: Promise<{locale: string}>; // <- async in Next 15
-};
+export default async function LocaleLayout({children, params}: Props) {
+  const {locale} = await params;
+  if (!(routing.locales as readonly string[]).includes(locale)) notFound();
 
-export default async function LocaleLayout(props: LayoutProps) {
-  const {locale} = await props.params;          // <- await it
-  const l = locale as Locale;
-  if (!routing.locales.includes(l)) notFound();
-
-  // Either works; this is explicit:
-  const messages = await getMessages({locale: l});
+  const messages = await getMessages(); // works only if plugin is wired
 
   return (
-    <html lang={l}>
+    <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={l} messages={messages}>
-          {props.children}
+        <NextIntlClientProvider messages={messages}>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
