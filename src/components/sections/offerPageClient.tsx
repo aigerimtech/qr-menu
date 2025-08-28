@@ -190,7 +190,7 @@ export default function OfferPageClient({ offer }: Props) {
               aria-label={tDetail("share")}
               className="md:hidden p-2 -m-2 rounded hover:bg-black/5 active:bg-black/10"
             >
-              <Image src="/icons/contact/share.svg" alt="" width={18} height={20} className="w-[18px] h-[20px]" priority />
+              <Image src="/icons/vip/share.svg" alt="" width={18} height={20} className="w-[18px] h-[20px]" priority />
             </button>
           </div>
 

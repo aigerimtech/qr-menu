@@ -16,7 +16,7 @@ export default async function Home({params}: PageProps) {
       <Hero />
       <section className="bg-white py-16">
         <Container>
-          <OffersSlider />
+          <OffersSlider slug="vip-karaoke" />
         </Container>
       </section>
     </>
