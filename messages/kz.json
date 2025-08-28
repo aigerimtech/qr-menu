@@ -54,5 +54,29 @@
 
   "modal": {
     "close": "Жабу"
+  },
+
+  "menu": {
+    "title": "НЕГІЗГІ МӘЗІР",
+    "categories": {
+      "salads": "Салаттар",
+      "mains": "Ыстық тағамдар",
+      "soups": "Сорпалар",
+      "drinks": "Сусындар",
+      "coldApps": "Салқын тіскебасарлар",
+      "alcohol": "Алкогольді сусындар"
+    },
+    
+    "filters": {
+      "vegOnly": "Тек вегетариандық тағамдар",
+      "noSpicy": "Ащы тағамдарды алып тастау"
+    },
+
+    "dishes": {
+    "placeholder": {
+      "title": "Тағам атауы",
+      "desc": "Gorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis."
+    }
+  }
   }
 }

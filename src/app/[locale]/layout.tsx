@@ -1,4 +1,3 @@
-// app/[locale]/layout.tsx
 import {ReactNode} from "react";
 import {notFound} from "next/navigation";
 import {NextIntlClientProvider, hasLocale} from "next-intl";
@@ -6,6 +5,7 @@ import {getMessages, setRequestLocale} from "next-intl/server";
 import {routing} from "@/i18n/routing";
 import Navbar from "@/components/layout/navBar";
 import Footer from "@/components/layout/footer";
+import MenuSection from "@/components/menu/menuSection";
 
 type Props = {children: ReactNode; params: Promise<{locale: string}>};
 
@@ -31,6 +31,7 @@ export default async function LocaleLayout({children, params}: Props) {
              <main className="relative">
               {children}
              </main>
+             <MenuSection/>
            <Footer />
           </NextIntlClientProvider>
         </body>

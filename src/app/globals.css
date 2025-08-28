@@ -25,12 +25,13 @@ body { background: #060606; overflow-x: hidden; }
   width: 12px; height: 8px; background: #fff;
 }
 
-
 :root { --nav-h: 96px; }
 .hide-footer #site-footer { display: none !important; }
 html.no-nav-gap { --nav-h: 0px; } /* на оффер-странице */
 
 
 html.no-nav-gap body { background: #fff !important; }
+
+
 
 
